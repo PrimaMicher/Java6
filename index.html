@@ -6,6 +6,7 @@
 </head>
 <body>
   <div class="target"></div>
+  <ul class="bodik"></ul>
   <script>
 
     fetch('http://jsonplaceholder.typicode.com/posts')
@@ -31,10 +32,17 @@
               detailsBtn.onclick=function (){
                   console.log('print name of users',post.id);
 
-                  fetch('http://jsonplaceholder.typicode.com/posts/${post.userId}/users')
+                  fetch(`http://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
                   .then(value => value.json())
-                  .then(value => {
-                      console.log(value);
+                  .then(bodik => {
+                       let bodik=document.getElementsByClassName('body')[0];
+                       bodik.innerHTML='';
+                      for (const bodikElement of bodik) {
+                          let liBodik=document.createElement('li');
+                          liBodik.innerText=bodikElement.body;
+                          bodik.append(liBodik);
+                      }
+                      console.log(bodik);
 
                   });
               };
